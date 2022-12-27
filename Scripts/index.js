@@ -23,19 +23,18 @@ function Person(name, age) {
  * @property {string} model
  * @property {number} graduationYear
  * @property {string} licensePlate
- * @property {Person} owner
  */
 function Car(brand, model, graduationYear, licensePlate) {
     this.brand = brand;
     this.model = model;
     this.graduationYear = graduationYear;
     this.licensePlate = licensePlate;
-    this.owner = Person;
+    this.owner = {};
     /**
      * @param {Person} owner
      */
     this.ownerAssignment = function(owner) {
-        if(this.owner === Person) {
+        if(owner instanceof Person) {
             if (owner.age >= 18) {
                 this.owner = owner;
             } else {
@@ -49,7 +48,7 @@ function Car(brand, model, graduationYear, licensePlate) {
     this.informationCar = function() {
         console.log(`Марка автомобіля: ${this.brand};\nМодель автомобіля: ${this.model};`
             + `\nРік випуску: ${this.graduationYear};\nНомерний знак: ${this.licensePlate};`);
-        if (this.owner !== Person) {
+        if (this.owner.hasOwnProperty('name')) {
             this.owner.outputNameAndAge();
         } else {
             console.log('Цей автомобіль не має власника.');
